@@ -13,7 +13,7 @@ def extract_nif(text):
 
 def get_trimester(month):
     # Convert month to trimester code
-    return f"{((month-1)//3 + 1):02d}T"
+    return f"{((month-1)//3 + 1)*3:02d}T"
 
 def convert_euro_to_float(value):
     # Remove € symbol, spaces and convert comma to dot
@@ -93,10 +93,10 @@ def format_xml(element):
     return '\n'.join(cleaned_lines)
 
 def get_trimester_months(trimester):
-    # Get start and end months for a trimester (01T to 04T)
+    # Get start and end months for a trimester (03T to 12T)
     trimester_num = int(trimester[:2])
-    start_month = (trimester_num - 1) * 3 + 1
-    end_month = start_month + 2
+    start_month = trimester_num - 2
+    end_month = trimester_num
     return (start_month, start_month + 1, end_month)
 
 def create_xml(template_path, output_path, data, year_trimesters, nif=None):
